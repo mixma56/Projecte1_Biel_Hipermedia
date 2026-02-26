@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speedrun Hall of Fame</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+       
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 flex items-center justify-center min-h-screen font-sans text-gray-100">
+
+    <div class="relative w-full max-w-sm h-[800px] max-h-screen bg-[#0f111a] border border-gray-800 shadow-2xl overflow-hidden sm:rounded-[2.5rem] sm:border-4 sm:border-gray-800">
+
+        <div id="listView" class="absolute inset-0 flex flex-col transition-transform duration-300 transform translate-x-0">
+            
+            <!-- Titulo Hall Of Fame -->
+            <header class="pt-12 pb-6 px-6 text-center">
+                <h1 class="text-3xl font-extrabold tracking-tight text-white">Hall of Fame</h1>
+            </header>
+
+            <!-- Botones filtros -->
+            <div class="flex justify-center gap-3 px-6 pb-6">
+                <button id="boton_any"
+                    class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-1.5 px-4 rounded-full transition shadow-lg shadow-indigo-500/30">Any%</button>
+                <button id="boton_glitchless"
+                    class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-sm font-semibold py-1.5 px-4 rounded-full transition border border-gray-700">Glitchless</button>
+                <button id="boton_100"
+                    class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-sm font-semibold py-1.5 px-4 rounded-full transition border border-gray-700">100%</button>
+            </div>
+
+            <!-- Main donde salen los juegos -->
+            <main id="contenedor_juegos" class="flex-1 overflow-y-auto hide-scroll px-6 pb-8 space-y-4">
+                
+                <!-- Plantilla para cada article, se elimina del DOM una vez se cargan todos los videos -->
+                <article id="plantilla" class="group flex bg-gray-800 rounded-2xl overflow-hidden cursor-pointer border border-gray-700 hover:border-indigo-500/80 transition-all duration-300 shadow-lg relative min-h-[110px]">
+                        
+                        <div class="absolute inset-y-0 left-0 w-2/3">
+                            <img src="" alt="" class="js-miniatura w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-300 [-webkit-mask-image:linear-gradient(to_right,black_20%,transparent_100%)]">
+                        </div>
+
+                        <div class="relative z-10 w-full p-4 pl-28 flex flex-col justify-center">
+                            <h2 class="font-bold text-white text-md leading-tight mb-1 drop-shadow-md">
+                                <span class="js-titulo">Título del juego</span> 
+                                <span class="js-categoria text-indigo-400 font-normal">Any%</span>
+                            </h2>
+                            <div class="text-xs text-gray-300 space-y-0.5 mt-2">
+                                <p>Runner: <span class="js-runner text-white font-medium">Nombre</span></p>
+                                <p class="js-tiempo text-emerald-400 font-mono font-semibold">Time: 00:00</p>
+                            </div>
+                        </div>
+                        
+                    </article>           
+                
+            </main>
+        </div>
+
+
+    </div>
+
+    <script src="data/data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
