@@ -21,8 +21,8 @@
 </head>
 
 <body class="bg-gray-900 flex items-center justify-center min-h-screen font-sans text-gray-100">
-
-    <div class="relative w-full h-screen sm:h-[800px] sm:max-w-sm bg-[#0f111a] overflow-hidden sm:rounded-[2.5rem] sm:border-4 sm:border-gray-800 sm:shadow-2xl">
+    <!--h-dvh hace que el contenedor tenga la altura total de la ventana del navegador y se adapte dependiendo del tamaño de la pantalla -->
+    <div class="relative w-full h-dvh sm:h-[800px] sm:max-w-sm bg-[#0f111a] overflow-hidden sm:rounded-[2.5rem] sm:border-4 sm:border-gray-800 sm:shadow-2xl">
 
         <div id="listView" class="absolute inset-0 flex flex-col transition-transform duration-300 transform translate-x-0">
             
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Main donde salen los juegos -->
-            <main id="contenedor_juegos" class="flex-1 overflow-y-auto hide-scroll px-6 pb-8 space-y-4">
+            <main id="contenedor_juegos" class="flex-1 overflow-y-auto hide-scroll px-6 pb-24 sm:pb-8 space-y-4">
                 
                 <!-- Plantilla para cada article, se elimina del DOM una vez se cargan todos los videos -->
                 <article id="plantilla" class="group flex bg-gray-800 rounded-2xl overflow-hidden cursor-pointer border border-gray-700 hover:border-indigo-500/80 transition-all duration-300 shadow-lg relative min-h-[110px]">
