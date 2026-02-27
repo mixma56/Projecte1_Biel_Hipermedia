@@ -38,51 +38,28 @@ videos.forEach(video => {
 plantilla.remove();
 
 // MANEJO DE LOS BOTONES DE FILTROS
-const botonAny = document.getElementById('boton_any');
-const botonGlitchless = document.getElementById('boton_glitchless');
-const boton100 = document.getElementById('boton_100');
+const botonesFiltro = document.querySelectorAll('[id^="boton_"]');
+
 
 // Clases para saber si está activo o no el botón
 const clasesActivo = ['bg-indigo-600', 'hover:bg-indigo-500', 'text-white', 'shadow-lg', 'shadow-indigo-500/30'];
 const clasesInactivo = ['bg-gray-800', 'hover:bg-gray-700', 'text-gray-300', 'border', 'border-gray-700'];
 
-botonAny.addEventListener("click", () => {
-    botonAny.classList.remove(...clasesInactivo);
-    botonAny.classList.add(...clasesActivo);
-    
-    botonGlitchless.classList.remove(...clasesActivo);
-    botonGlitchless.classList.add(...clasesInactivo);
-    
-    boton100.classList.remove(...clasesActivo);
-    boton100.classList.add(...clasesInactivo);
+botonesFiltro.forEach(boton => {
+    boton.addEventListener("click", () => {
+        
+        botonesFiltro.forEach(b => {
+            b.classList.remove(...clasesActivo);
+            b.classList.add(...clasesInactivo);
+        });
 
-    filtrarJuegos('any');
-});
+        boton.classList.remove(...clasesInactivo);
+        boton.classList.add(...clasesActivo);
 
-botonGlitchless.addEventListener("click", () => {
-    botonGlitchless.classList.remove(...clasesInactivo);
-    botonGlitchless.classList.add(...clasesActivo);
-    
-    botonAny.classList.remove(...clasesActivo);
-    botonAny.classList.add(...clasesInactivo);
-    
-    boton100.classList.remove(...clasesActivo);
-    boton100.classList.add(...clasesInactivo);
-
-    filtrarJuegos('glitchless');
-});
-
-boton100.addEventListener("click", () => {
-    boton100.classList.remove(...clasesInactivo);
-    boton100.classList.add(...clasesActivo);
-    
-    botonAny.classList.remove(...clasesActivo);
-    botonAny.classList.add(...clasesInactivo);
-    
-    botonGlitchless.classList.remove(...clasesActivo);
-    botonGlitchless.classList.add(...clasesInactivo);
-
-    filtrarJuegos('100');
+        const categoria = boton.id.replace('boton_', '');
+        
+        filtrarJuegos(categoria);
+    });
 });
 
 // FILTRO DE LOS JUEGOS
