@@ -19,6 +19,13 @@
             nuevoArticulo.querySelector('.js-runner').textContent = video.runner;
             nuevoArticulo.querySelector('.js-tiempo').textContent = video.time;
 
+            const progresoGuardado = JSON.parse(localStorage.getItem('progresoVideos')) || {};
+            const infoVideo = progresoGuardado[video.id];
+            //Si existe y esta visto lo muestro 
+            if (infoVideo && infoVideo.visto) {
+                nuevoArticulo.querySelector('.js-visto').classList.remove('hidden');
+            }
+
             nuevoArticulo.addEventListener("click", () => {
                 window.location.href = `reproductor.html?id=${video.id}`;
             });
