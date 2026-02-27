@@ -7,7 +7,7 @@ const videos = [
     time: "04:54:415",
     description: "Speedrun de Super Mario Bros en Any%.",
     thumbnail: "assets/fotos/superMarioBros_portada.jpg",
-    videoUrl: "assets/videos/superMarioBrosAny%_video.mp4"
+    videoUrl: "assets/videos/superMarioBrosAny_video.mp4"
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const videos = [
     time: "24:51:036",
     description: "Speedrun de Celeste en Any%.",
     thumbnail: "assets/fotos/miniaturaCeleste.jpg",
-    videoUrl: "assets/videos/celesteAny%_video.mp4"
+    videoUrl: "assets/videos/celesteAny_video.mp4"
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const videos = [
     time: "06:50:359",
     description: "Speedrun de Minecraft en Any% Glitchless.",
     thumbnail: "assets/fotos/miniaturaMinecraft1.jpg",
-    videoUrl: "assets/videos/minecraftAny%Glitchless_video.mp4"
+    videoUrl: "assets/videos/minecraftAnyGlitchless_video.mp4"
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const videos = [
     time: "00:31:852",
     description: "Increible.",
     thumbnail: "assets/fotos/miniaturaMinecraft2.jpg",
-    videoUrl: "assets/videos/minecraftAny%SetSeed_video.mp4"
+    videoUrl: "assets/videos/minecraftAnySetSeed_video.mp4"
   },
   {
     id: 5,
@@ -57,6 +57,6 @@ const videos = [
     time: "09:24:910",
     description: "Speedrun de Ultrakill en Any%.",
     thumbnail: "assets/fotos/miniaturaUltrakill.jpg",
-    videoUrl: "assets/videos/UltrakillAny%_video.mp4"
+    videoUrl: "assets/videos/UltrakillAny_video.mp4"
   }
 ];
