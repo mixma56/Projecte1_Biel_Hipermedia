@@ -9,6 +9,7 @@
     <style>
         ::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
     </style>
 </head>
 <body class="bg-gray-900 flex items-center justify-center min-h-[100dvh] font-sans text-gray-100">
@@ -23,12 +24,42 @@
             <h1 class="text-xl font-extrabold tracking-tight text-white w-full text-center">Hall of Fame</h1>
         </header>
 
-        <main class="flex-1 overflow-y-auto hide-scroll">
-            <div class="w-full aspect-video bg-black relative group">
-                <video id="detalle-video" class="w-full h-full object-cover" controls></video>
+        <main class="flex-1 overflow-y-auto hide-scroll pb-10">
+            <div class="w-full aspect-video bg-black relative group cursor-pointer" id="video-container">
+                <video id="detalle-video" class="w-full h-full object-cover"></video>
             </div>
 
-            <div class="p-6 pb-24 lg:pb-6">
+            <div class="px-6 py-4 flex flex-col gap-3">
+                <input type="range" id="progress-bar" class="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-white hover:h-2 transition-all" value="0" min="0" step="0.1">
+
+                <div class="flex items-center justify-between mt-1">
+                    
+                    <div class="flex items-center gap-4">
+                        <button id="play-btn" class="text-white hover:text-indigo-400 transition transform hover:scale-110 focus:outline-none">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path id="play-icon" d="M8 5v14l11-7z"/>
+                                <path id="pause-icon" class="hidden" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="text-white text-sm font-mono tracking-wider font-medium drop-shadow-md">
+                            <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 w-[100px]">
+                        <button id="mute-btn" class="text-gray-300 hover:text-white transition focus:outline-none">
+                            <svg id="volume-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                        <input type="range" id="volume-slider" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-white" min="0" max="1" step="0.05" value="1">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="px-6 pb-6">
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <h2 id="detalle-titulo" class="text-2xl font-bold text-white mb-1"></h2>
@@ -49,8 +80,7 @@
                         Detalles
                         <div class="h-px flex-1 bg-gray-800 ml-2"></div>
                     </h3>
-                    <p id="detalle-descripcion" class="text-sm text-gray-300 leading-relaxed">
-                    </p>
+                    <p id="detalle-descripcion" class="text-sm text-gray-300 leading-relaxed"></p>
                 </div>
             </div>
         </main>

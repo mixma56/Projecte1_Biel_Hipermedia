@@ -4,40 +4,87 @@ const idBuscado = parseInt(idVideoStr);
 const videoEncontrado = videos.find(video => video.id === idBuscado);
 
 if (videoEncontrado) {
+    // Info del juego
     document.getElementById('detalle-titulo').textContent = videoEncontrado.title;
     document.getElementById('detalle-categoria').textContent = videoEncontrado.category;
     document.getElementById('detalle-runner').textContent = videoEncontrado.runner;
     document.getElementById('detalle-tiempo').textContent = videoEncontrado.time;
     document.getElementById('detalle-descripcion').textContent = videoEncontrado.description;
     
+    // Confi del video
     const videoElemento = document.getElementById('detalle-video');
     videoElemento.src = videoEncontrado.videoUrl;
     videoElemento.poster = videoEncontrado.thumbnail; 
 
-    //  LOCAL STORAGE:
+    //Elementos de control
+    const playBtn = document.getElementById('play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const videoContainer = document.getElementById('video-container');
+    const progressBar = document.getElementById('progress-bar');
+    const currentTimeEl = document.getElementById('current-time');
+    const totalTimeEl = document.getElementById('total-time');
+    const muteBtn = document.getElementById('mute-btn');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    // Formateo del tiempo
+    const formatTime = (time) => {
+        if (!time) return "0:00";
+        
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+        
+        return `${minutes}:${seconds}`;
+    };
+
+    // Función Play/Pause 
+    const togglePlay = () => {  
+        if (videoElemento.paused) {
+            videoElemento.play();
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        } else {
+            videoElemento.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+        }
+    };
+
+    playBtn.addEventListener('click', togglePlay);
+    videoContainer.addEventListener('click', togglePlay); // tambien funciona tocando el video
+
+    // Cargar la duración total cuando el video esté listo
+    videoElemento.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(videoElemento.duration);
+        progressBar.max = videoElemento.duration;
+    });
+
+    // Local Storage
     const progresoGuardado = JSON.parse(localStorage.getItem('progresoVideos')) || {};
     const progresoActual = progresoGuardado[idBuscado];
 
-    // buscar el tiempo guardado
+    // Si teníamos un tiempo guardado, adelantamos el vídeo a ese punto
     if (progresoActual && progresoActual.tiempo) {
         videoElemento.currentTime = progresoActual.tiempo;
     }
 
-    // Ir mirando el tiempo y marcar como "visto" si llega al final
     videoElemento.addEventListener('timeupdate', () => {
-        const progreso = JSON.parse(localStorage.getItem('progresoVideos')) || {};
         const tiempoActual = videoElemento.currentTime;
         const duracionTotal = videoElemento.duration;
-        
-        // Comprobar si ya estaba marcado como visto
 
-        if (progreso[idBuscado]){
-            let estadoVisto = progreso[idBuscado].visto;
-        } else{
-            let estadoVisto = false;
+        // Actualizar Interfaz 
+        currentTimeEl.textContent = formatTime(tiempoActual);
+        progressBar.value = tiempoActual;
+
+        // Guardado en Local Storage
+        const progreso = JSON.parse(localStorage.getItem('progresoVideos')) || {};
+        let estadoVisto = false;
+
+        if (progreso[idBuscado]) {
+            estadoVisto = progreso[idBuscado].visto;
         }
-    
-        // Doy por visto si llega a los ultimos 2 segundos del video
+
+        // Marcar como visto si quedan menos de 2 segundos
         if (duracionTotal && tiempoActual >= (duracionTotal - 2)) {
             estadoVisto = true;
         }
@@ -48,5 +95,29 @@ if (videoEncontrado) {
         };
         
         localStorage.setItem('progresoVideos', JSON.stringify(progreso));
+    });
+
+    // Barra de progreso
+    progressBar.addEventListener('input', () => {
+        videoElemento.currentTime = progressBar.value;
+    });
+
+    //Control de volumen
+    let lastVolume = 1; 
+
+    volumeSlider.addEventListener('input', () => {
+        videoElemento.volume = volumeSlider.value;
+        videoElemento.muted = volumeSlider.value == 0;
+        lastVolume = videoElemento.volume > 0 ? videoElemento.volume : 1;
+    });
+
+    muteBtn.addEventListener('click', () => {
+        videoElemento.muted = !videoElemento.muted;
+        if (videoElemento.muted) {
+            volumeSlider.value = 0;
+        } else {
+            volumeSlider.value = lastVolume;
+            videoElemento.volume = lastVolume;
+        }
     });
 }
