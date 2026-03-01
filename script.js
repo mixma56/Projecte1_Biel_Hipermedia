@@ -2,6 +2,8 @@
 const contenedorJuegos = document.getElementById('contenedor_juegos');
 const plantilla = document.getElementById('plantilla');
 
+const ultimoReproducido = localStorage.getItem('ultimoReproducido');
+
 videos.forEach(video => {
     const nuevoArticulo = plantilla.cloneNode(true);
 
@@ -20,6 +22,7 @@ videos.forEach(video => {
     //LOCAL STORAGE
     const progresoGuardado = JSON.parse(localStorage.getItem('progresoVideos')) || {};
     const infoVideo = progresoGuardado[video.id];
+    
     //mirar si está visto o no (info de script_detalle)
     if (infoVideo && infoVideo.visto) {
         const etiquetaVisto = nuevoArticulo.querySelector('.js-visto');
@@ -27,6 +30,14 @@ videos.forEach(video => {
             etiquetaVisto.classList.remove('hidden');
         }
     }
+
+    if (ultimoReproducido && parseInt(ultimoReproducido) === video.id) {
+            const etiquetaUltimo = nuevoArticulo.querySelector('.js-ultimo');
+            if (etiquetaUltimo) {
+                etiquetaUltimo.classList.remove('hidden');
+            }
+            nuevoArticulo.classList.add('border-indigo-500'); 
+        }
 
     nuevoArticulo.addEventListener("click", () => {
         window.location.href = `reproductor.html?id=${video.id}`;
@@ -37,7 +48,7 @@ videos.forEach(video => {
 
 plantilla.remove();
 
-// MANEJO DE LOS BOTONES DE FILTROS
+// CONTROL DE LOS BOTONES DE FILTROS
 const botonesFiltro = document.querySelectorAll('[id^="boton_"]');
 
 
@@ -63,16 +74,18 @@ botonesFiltro.forEach(boton => {
 });
 
 // FILTRO DE LOS JUEGOS
-function filtrarJuegos(categoria) {
-    // Es mejor seleccionar los artículos dinámicamente cada vez que filtras
+function filtrarJuegos(categoriaFiltro) {
     const articlesJuegos = document.querySelectorAll('#contenedor_juegos article');
     
     articlesJuegos.forEach(article => {
-        if (categoria === 'any') {
+        if (categoriaFiltro === 'any') {
+            
             article.classList.remove('hidden');
         } else {
             const categoriaJuego = article.getAttribute('data-categoria');
-            if (categoriaJuego === categoria) {
+            
+            // Usamos .includes() en lugar de === para que "glitchless" coincida con "any% glitchless"
+            if (categoriaJuego.includes(categoriaFiltro)) {
                 article.classList.remove('hidden');
             } else {
                 article.classList.add('hidden');

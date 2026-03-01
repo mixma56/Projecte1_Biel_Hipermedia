@@ -10,6 +10,7 @@ if (videoEncontrado) {
     document.getElementById('detalle-runner').textContent = videoEncontrado.runner;
     document.getElementById('detalle-tiempo').textContent = videoEncontrado.time;
     document.getElementById('detalle-descripcion').textContent = videoEncontrado.description;
+    localStorage.setItem('ultimoReproducido', idBuscado);
     
     // Confi del video
     const videoElemento = document.getElementById('detalle-video');

@@ -32,7 +32,7 @@ const videos = [
   {
     id: 4,
     title: "Minecraft",
-    category: "Any% SetSeed",
+    category: "Any% 100% NMG",
     runner: "nsla",
     time: "00:31:852",
     description: "Increible.",
@@ -42,7 +42,7 @@ const videos = [
   {
     id: 5,
     title: "Mario 64",
-    category: "16 Stars",
+    category: "16 Stars Low%",
     runner: "Suigi",
     time: "14:35:500",
     description: "Speedrun de Super Mario 64 en 16 Stars.",
@@ -52,7 +52,7 @@ const videos = [
   {
     id: 6,
     title: "Ultrakill",
-    category: "Any%",
+    category: "TAS",
     runner: "Dabonzack",
     time: "09:24:910",
     description: "Speedrun de Ultrakill en Any%.",

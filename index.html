@@ -74,11 +74,19 @@
                                 <p class="js-tiempo text-emerald-400 font-mono font-semibold">Time: 00:00</p>
                             </div>
                         </div>
-                        
-                        <span class="js-visto hidden absolute bottom-3 right-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider shadow-md shadow-emerald-500/30 ring-1 ring-emerald-400">
-                            Visto ✓
-                        </span>
-                        
+                                                
+                        <div class="absolute bottom-3 right-4 flex items-center gap-1.5">
+                            <span class="js-ultimo hidden bg-indigo-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center uppercase tracking-wider shadow-sm shadow-indigo-500/30 ring-1 ring-indigo-400">
+                                Last Seen
+                            </span>
+                            <span class="js-visto hidden bg-emerald-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1 uppercase tracking-wider shadow-sm shadow-emerald-500/30 ring-1 ring-emerald-400">
+                                Seen
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-2.5 h-2.5">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                        </div>
+                                                
                     </article>           
                 
             </main>
