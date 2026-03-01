@@ -27,6 +27,7 @@ if (videoEncontrado) {
     const totalTimeEl = document.getElementById('total-time');
     const muteBtn = document.getElementById('mute-btn');
     const volumeSlider = document.getElementById('volume-slider');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
 
     // Formateo del tiempo
     const formatTime = (time) => {
@@ -122,3 +123,24 @@ if (videoEncontrado) {
         }
     });
 }
+
+//Gestion de la pantalla completa
+
+fullscreenBtn.addEventListener('click', () => {
+    // Comprobamos si ya estamos en pantalla completa
+    if (!document.fullscreenElement) {
+        // Si no lo estamos, pedimos entrar (con compatibilidad para Safari/Móviles)
+        if (videoElemento.requestFullscreen) {
+            videoElemento.requestFullscreen();
+        } else if (videoElemento.webkitRequestFullscreen) { /* Safari/iOS */
+            videoElemento.webkitRequestFullscreen();
+        }
+    } else {
+        // Si ya lo estamos, salimos
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari/iOS */
+            document.webkitExitFullscreen();
+        }
+    }
+});

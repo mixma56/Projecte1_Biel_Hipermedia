@@ -78,18 +78,15 @@ function filtrarJuegos(categoriaFiltro) {
     const articlesJuegos = document.querySelectorAll('#contenedor_juegos article');
     
     articlesJuegos.forEach(article => {
-        if (categoriaFiltro === 'any') {
-            
+        // Sacamos la categoría del artículo (ej: "any%", "any% glitchless", "16 stars")
+        const categoriaJuego = article.getAttribute('data-categoria');
+        
+        // Comprobamos si la categoría del juego contiene el texto del filtro
+        // Si el filtro es "any", coincidirá con "any%", "any% glitchless", etc.
+        if (categoriaJuego.includes(categoriaFiltro)) {
             article.classList.remove('hidden');
         } else {
-            const categoriaJuego = article.getAttribute('data-categoria');
-            
-            // Usamos .includes() en lugar de === para que "glitchless" coincida con "any% glitchless"
-            if (categoriaJuego.includes(categoriaFiltro)) {
-                article.classList.remove('hidden');
-            } else {
-                article.classList.add('hidden');
-            }
+            article.classList.add('hidden');
         }
     });
 }
