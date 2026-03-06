@@ -146,22 +146,3 @@ if (videoEncontrado) {
     });
 }
 
-//  GESTIÓN DE PANTALLA COMPLETA 
-
-fullscreenBtn.addEventListener('click', () => {
-    // Si no estamos en pantalla completa, intentamos entrar
-    if (!document.fullscreenElement) {
-        if (videoElemento.requestFullscreen) {
-            videoElemento.requestFullscreen();
-        } else if (videoElemento.webkitRequestFullscreen) { 
-            videoElemento.webkitRequestFullscreen();
-        }
-    } else {
-        // Si ya estamos, salimos de ella
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
-    }
-});
