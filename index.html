@@ -9,14 +9,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
        
+       /* Oculta la barra de desplazamiento en  Chrome, Safari, ... (webkits) */
         ::-webkit-scrollbar {
             display: none;
         }
 
-        .hide-scroll {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
     </style>
 </head>
 
@@ -59,11 +56,11 @@
                 
                 <!-- Plantilla para cada article, se elimina del DOM una vez se cargan todos los videos -->
                 <article id="plantilla" class="group flex bg-gray-800 rounded-2xl overflow-hidden cursor-pointer border border-gray-700 hover:border-indigo-500/80 transition-all duration-300 shadow-lg relative min-h-[110px]">
-                        
+                        <!-- Imagen de portada -->
                         <div class="absolute inset-y-0 left-0 w-2/3">
                             <img src="" alt="" class="js-miniatura w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-300 [-webkit-mask-image:linear-gradient(to_right,black_20%,transparent_100%)]">
                         </div>
-
+                        <!--Donde va todo el texto-->
                         <div class="relative z-10 w-full p-4 pl-28 flex flex-col justify-center">
                             <h2 class="font-bold text-white text-md leading-tight mb-1 drop-shadow-md">
                                 <span class="js-titulo">Título del juego</span> 
@@ -74,7 +71,7 @@
                                 <p class="js-tiempo text-emerald-400 font-mono font-semibold">Time: 00:00</p>
                             </div>
                         </div>
-                                                
+                        <!-- Estado del juego (si esta visto, si es last seen, etc.)-->
                         <div class="absolute bottom-3 right-4 flex items-center gap-1.5">
                             <span class="js-ultimo hidden bg-indigo-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center uppercase tracking-wider shadow-sm shadow-indigo-500/30 ring-1 ring-indigo-400">
                                 Last Seen
@@ -94,8 +91,9 @@
 
 
     </div>
-
+    <!--json-->
     <script src="data/data.js"></script>
+    <!--script del index-->
     <script src="script.js"></script>
 </body>
 
